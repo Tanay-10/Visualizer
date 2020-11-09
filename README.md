@@ -13,7 +13,8 @@ git
 - In ``` LoginDetail ``` Create table ``` usertable ``` with Columns
     - username varchar
     - password varchar
-    - timestamp varchar
+    - status varchar
+    - date_time varchar
 - Clone the Repository
 ```
 git clone https://github.com/Tanay-10/Visualizer.git
