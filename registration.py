@@ -91,12 +91,13 @@ def login():
 # Implementing event on register button
 
 def register_user():
+    status = "Registered"
     unix = int(time.time())
     date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d  %H:%M:%S'))
     username_info = username.get()
     password_info = password.get()
     #sql = "insert into usertable(username,password,timestamp) values(?,?,?)"
-    cursordb.execute("insert into usertable(username,password,timestamp) values(%s,%s,%s)", (username_info, password_info,date))
+    cursordb.execute("insert into usertable(username,password,status,date_time) values(%s,%s,%s,%s)", (username_info, password_info,status,date))
     connectiondb.commit();
     #cursordb.close()
     connectiondb.close()
@@ -107,17 +108,21 @@ def register_user():
 # Implementing event on login button
 
 def login_verify():
+    status = "logged in"
     global login_screen
     unix = int(time.time())
     date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d  %H:%M:%S'))
     user_verification = username_verify.get()
     pass_verification = password_verify.get()
     sql = "select * from usertable where username = %s and password = %s"
+    query = "insert into usertable(username,password,status,date_time) values(%s,%s,%s,%s)"
     cursordb.execute(sql, [(user_verification), (pass_verification)])
     results = cursordb.fetchall()
     if results:
         for i in results:
             print('Logged in Successfully on ', date)
+            cursordb.execute(query, (user_verification, pass_verification,status,date))
+            connectiondb.commit()
             login_sucess()
             break
     else:
