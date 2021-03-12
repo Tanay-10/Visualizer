@@ -18,6 +18,8 @@ git
 - Clone the Repository
 ```
 git clone https://github.com/Tanay-10/Visualizer.git
+or for ssh
+git clone git@github.com:Tanay-10/Visualizer.git
 ```
 - ``` cd Visualizer ```
 -  Run the ``` registration.py ```
